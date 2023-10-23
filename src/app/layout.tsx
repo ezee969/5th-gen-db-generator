@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang='en'>
       <body className='flex min-h-screen flex-col py-2 text-neutral-50'>
         <Header />
-        <main className='grow py-3'>{children}</main>
+        <main className='grow py-3 pt-24'>{children}</main>
         <Footer />
       </body>
     </html>
