@@ -8,13 +8,12 @@ const Header = () => {
       <nav className='container mx-auto flex items-center justify-between'>
         <div>
           <h1 className='text-4xl font-extrabold uppercase tracking-wider'>
-            TITULO
+            DB Forge
           </h1>
         </div>
         <ul className='flex space-x-6'>
-          <HeaderLink href='/about'>About</HeaderLink>
+          <HeaderLink href='/home'>Home</HeaderLink>
           <HeaderLink href='/login'>Log In</HeaderLink>
-          <HeaderLink href='/signup'>Sign Up</HeaderLink>
         </ul>
       </nav>
     </header>
