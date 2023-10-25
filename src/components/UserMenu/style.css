@@ -1,0 +1,92 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.big-avatar {
+  /* width: 48px;
+  height: 48px; */
+  border-radius: 50%;
+}
+
+.dropdown-toggle:focus {
+  color: #fff;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.15s ease-in-out,
+    visibility 0.15s ease-in-out;
+  min-width: 260px;
+  padding: 8px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-toggle:focus + .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.small-avatar {
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.user-card .user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-card .name {
+  font-size: 0.9em;
+  color: #4d4d4d;
+  font-weight: bold;
+}
+
+.user-card .email {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.sign-out-button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  color: #333;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
+}
+
+.sign-out-button:hover {
+  color: #fff;
+  background-color: #333;
+}
