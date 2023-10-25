@@ -3,14 +3,14 @@ import React from 'react';
 import SignInForm from '@/components/SignInForm';
 import Link from 'next/link';
 
-const SignInPage = () => {
+const LoginPage = () => {
   return (
     <>
       <h2 className='mb-10 text-center text-2xl font-bold text-slate-800'>
         Sign in to your account
       </h2>
       <div className='m-auto mb-10 w-[500px] rounded-lg bg-neutral-50 p-10 text-slate-800 shadow-lg'>
-        <SignInForm />
+        {/* <SignInForm /> */}
       </div>{' '}
       <p className='mb-6 text-center text-gray-500'>
         Not a member?{' '}
@@ -25,4 +25,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default LoginPage;
