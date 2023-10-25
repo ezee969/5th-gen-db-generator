@@ -4,15 +4,20 @@ import HeaderLink from './HeaderLink';
 // Utils
 import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
+// Ui
+import { unbounded } from '@/app/fonts';
 
 const Header = async () => {
   const session = await getServerSession(options);
+  console.log(session?.user);
 
   return (
-    <header className='w-full px-6 py-8'>
+    <header className='w-full bg-slate-800 px-6 py-8'>
       <nav className='container mx-auto flex items-center justify-between'>
         <div>
-          <h1 className='text-4xl font-extrabold uppercase tracking-wider'>
+          <h1
+            className={`text-4xl font-extrabold uppercase tracking-wider ${unbounded.className}`}
+          >
             DB Forge
           </h1>
         </div>

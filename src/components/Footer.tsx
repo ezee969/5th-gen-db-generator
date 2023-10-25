@@ -1,12 +1,21 @@
 import React from 'react';
+// Components/Ui
+import { unbounded } from '@/app/fonts';
+import facebookIcon from '@/img/facebook-icon.png';
+import instagramIcon from '@/img/instagram-icon.png';
+import youtubeIcon from '@/img/youtube-icon.png';
+import StyledFooterIcon from './StyledFooterIcon';
 
 const Footer = () => {
   return (
-    <footer className='  py-2 text-center text-xs'>
-      Footer:
-      <a target='_blank' href='https://google.com'>
-        LINK
-      </a>
+    <footer className='flex items-center justify-center gap-2 bg-slate-800 py-3 text-xs'>
+      <span className={`${unbounded.className} font-extrabold`}>DB Forge</span>
+      <span className='mr-2'>dbforge@gmail.com</span>
+      <div className='flex gap-2'>
+        <StyledFooterIcon iconSrc={facebookIcon} />
+        <StyledFooterIcon iconSrc={instagramIcon} />
+        <StyledFooterIcon iconSrc={youtubeIcon} />
+      </div>
     </footer>
   );
 };
