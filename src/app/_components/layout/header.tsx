@@ -1,12 +1,12 @@
 import React from 'react';
 // Components/ui
-import HeaderLink from './HeaderLink';
+import HeaderLink from './headerLink';
 // Utils
 import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 // Ui
-import { unbounded } from '@/app/fonts';
-import UserMenu from './UserMenu/UserMenu';
+import { unbounded } from '@/fonts';
+import UserMenu from '../../../components/UserMenu/UserMenu';
 import Link from 'next/link';
 
 const Header = async () => {

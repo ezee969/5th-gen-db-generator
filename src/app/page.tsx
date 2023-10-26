@@ -1,10 +1,9 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import sequelizeLogoSvg from '@/img/sequelize_logo.svg';
-import Hero from '@/components/Hero';
-import Features from '@/components/Features';
-import Testimonials from '@/components/Testimonials';
-import Contact from '@/components/Contact';
+import Hero from './_components/page/hero';
+import Features from './_components/page/features';
+import Testimonials from './_components/page/testimonials';
+import Contact from './_components/page/contact';
 export default function HomePage() {
   return (
     <section>
