@@ -1,15 +1,49 @@
 import type { Metadata } from 'next';
 // Components/ui
 import './globals.css';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import Header from './_components/layout/header';
+import Footer from './_components/layout/footer';
 // Types
 import { ReactNode } from 'react';
 // Provider
 
 export const metadata: Metadata = {
-  title: 'DB Generator',
-  description: 'Descripcion',
+  title: { default: 'DB Forge', template: '%s | DB Forge' },
+  description:
+    'Experience the future of database modeling with our Next.js page. Our 5th generation tool simplifies Sequelize database model creation for developers, making your coding journey more efficient and productive.',
+  keywords: [
+    'DB Forge',
+    'Database',
+    'Model creation',
+    'Model management',
+    'Sequelize',
+    '5th Generation tool',
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  openGraph: {
+    // Para cuando se comparte el link de nuestra pagina en redes sociales por ejemplo, se muestra la imagen y el titulo que nosotros queramos
+    type: 'website',
+    locale: 'en_US',
+    url: 'http://localhost:3000',
+    title: 'DB Forge',
+    description:
+      'Experience the future of database modeling with our Next.js page. Our 5th generation tool simplifies Sequelize database model creation for developers, making your coding journey more efficient and productive.',
+    images: [
+      {
+        url: 'https://www.example.com/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'DB Forge',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
