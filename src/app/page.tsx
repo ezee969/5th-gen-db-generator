@@ -4,6 +4,7 @@ import Hero from './_components/page/hero';
 import Features from './_components/page/features';
 import Testimonials from './_components/page/testimonials';
 import Contact from './_components/page/contact';
+
 export default function HomePage() {
   return (
     <section>
@@ -11,9 +12,10 @@ export default function HomePage() {
       <div className='container mx-auto flex w-[1200px] justify-center rounded border bg-slate-50 '>
         <Image
           className='bg-slate-50'
-          alt='Placeholder Image'
+          alt='Sequelize logo'
           src={sequelizeLogoSvg}
           width={500}
+          height={300}
         />
       </div>
       <h2 className='mb-8 pt-40 text-center text-2xl font-semibold tracking-tighter text-gray-200 md:text-6xl lg:text-7xl'>
