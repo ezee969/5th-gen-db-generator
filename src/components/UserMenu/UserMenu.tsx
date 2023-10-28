@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 // Components/ui
-import './style.css';
+import styles from './UserMenu.module.css';
 import Link from 'next/link';
 import avatarImg from '@/img/avatar.png';
 import Image from 'next/image';
+// Utils
+import { signOut } from 'next-auth/react';
 
 type User =
   | {
@@ -20,35 +22,37 @@ type Props = {
 
 const UserMenu = ({ user }: Props) => {
   return (
-    <div className='dropdown'>
-      <button className='dropdown-toggle'>
+    <div className={styles['dropdown']}>
+      <button className={styles['dropdown-toggle']}>
         <Image
           width={36}
           height={36}
           src={user?.image ? user.image : avatarImg}
           alt='User Avatar'
-          className='big-avatar'
+          className={styles['big-avatar']}
         />
       </button>
-      <div className='dropdown-menu'>
-        <div className='user-card'>
+      <div className={styles['dropdown-menu']}>
+        <div className={styles['user-card']}>
           <Image
             src={user?.image ? user.image : avatarImg}
             width={64}
             height={64}
             alt='User Avatar'
-            className='small-avatar'
+            className={styles['small-avatar']}
           />
-          <div className='user-info'>
-            <span className='name'>{user?.name ? user.name : 'John Doe'}</span>
-            <span className='email'>
+          <div className={styles['user-info']}>
+            <span className={styles['name']}>
+              {user?.name ? user.name : 'John Doe'}
+            </span>
+            <span className={styles['email']}>
               {user?.name ? user.email : 'johndoe@example.com'}
             </span>
           </div>
         </div>
         <Link
           href='/api/auth/signout?callbackUrl=/'
-          className='sign-out-button'
+          className={styles['sign-out-button']}
         >
           Sign out
         </Link>
