@@ -6,7 +6,7 @@ const Contact = () => {
     <section className='relative pb-24'>
       <div className='mx-auto max-w-6xl px-4 text-center sm:px-6'>
         <div className='py-24 md:py-36'>
-          <h1 className='mb-5 text-6xl font-bold text-white'>
+          <h1 className='mb-5 font-mono text-6xl font-bold text-white'>
             Subscribe to our newsletter
           </h1>
           <h1 className='mb-9 text-2xl font-semibold text-gray-200'>

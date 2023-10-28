@@ -8,7 +8,7 @@ const Hero = () => {
       >
         Create your sequelize db models fast and easy
       </h1>
-      <h2 className='pb-11 text-center text-2xl font-medium text-gray-600'>
+      <h2 className='pb-11 text-center text-2xl font-medium text-gray-200'>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, vitae
         <br />
         Lorem ipsum dolor sit amet consectetur
