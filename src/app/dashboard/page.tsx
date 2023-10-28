@@ -24,7 +24,7 @@ const DasboardPage = async () => {
     redirect('/');
   }
 
-  return <div>HomePage</div>;
+  return <div>DashboardPage</div>;
 };
 
 export default DasboardPage;

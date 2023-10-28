@@ -27,23 +27,6 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
-  openGraph: {
-    // Para cuando se comparte el link de nuestra pagina en redes sociales por ejemplo, se muestra la imagen y el titulo que nosotros queramos
-    type: 'website',
-    locale: 'en_US',
-    url: 'http://localhost:3000',
-    title: 'DB Forge',
-    description:
-      'Experience the future of database modeling with our Next.js page. Our 5th generation tool simplifies Sequelize database model creation for developers, making your coding journey more efficient and productive.',
-    images: [
-      {
-        url: 'https://www.example.com/images/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'DB Forge',
-      },
-    ],
-  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

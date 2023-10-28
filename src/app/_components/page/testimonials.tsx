@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import sequelizeSvg from '@/img/sequelize.svg';
+import sequelizeSvg from '@/img/sequelizejs-icon.svg';
 
 const testimonials = [1, 2];
 const Testimonials = () => {
