@@ -1,6 +1,7 @@
 import React, { FC, ChangeEvent } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { saveModel } from '@/services/modelService';
 
 interface Field {
   fieldName: string;
@@ -26,7 +27,7 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
   const formik = useFormik({
     initialValues: {
       fieldName: '',
-      fieldType: 'String',
+      fieldType: 'INT',
       size: '',
       defaultValue: '',
       notNull: false,
@@ -39,11 +40,11 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
       size: Yup.string(),
       defaultValue: Yup.string(),
     }),
-    onSubmit: () => console.log(model),
+    onSubmit: () => saveModel(model),
   });
 
   const addFieldToModel = () => {
-    if (formik.values.fieldName.trim() === '') {
+    if (formik.values?.fieldName.trim() === '') {
       return;
     }
 
@@ -52,7 +53,17 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
       fields: [...prevModel.fields, formik.values],
     }));
 
-    formik.resetForm();
+    formik.resetForm({
+      values: {
+        fieldName: '',
+        fieldType: 'INT',
+        size: '',
+        defaultValue: '',
+        notNull: false,
+        unique: false,
+        primaryKey: false,
+      },
+    });
   };
 
   const handleModelNameChange = (e: ChangeEvent<HTMLInputElement>) => {

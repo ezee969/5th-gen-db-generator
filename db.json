@@ -1,3 +1,28 @@
 {
-  "models": []
+  "models": [
+    {
+      "modelName": "teteo",
+      "fields": [
+        {
+          "fieldName": "numerito",
+          "fieldType": "INT",
+          "size": "",
+          "defaultValue": "",
+          "notNull": false,
+          "unique": false,
+          "primaryKey": false
+        },
+        {
+          "fieldName": "numerito2",
+          "fieldType": "INT",
+          "size": "",
+          "defaultValue": "",
+          "notNull": false,
+          "unique": false,
+          "primaryKey": false
+        }
+      ],
+      "id": 1
+    }
+  ]
 }
