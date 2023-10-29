@@ -1,3 +1,37 @@
 {
-  "userDefinedModels": []
+  "models": [
+    {
+      "modelName": "user1",
+      "fields": [
+        {
+          "fieldName": "firstName",
+          "fieldType": "STRING",
+          "size": "",
+          "defaultValue": "",
+          "notNull": true,
+          "unique": false,
+          "primaryKey": false
+        },
+        {
+          "fieldName": "lastName",
+          "fieldType": "STRING",
+          "size": "",
+          "defaultValue": "",
+          "notNull": false,
+          "unique": false,
+          "primaryKey": false
+        },
+        {
+          "fieldName": "email",
+          "fieldType": "STRING",
+          "size": "",
+          "defaultValue": "",
+          "notNull": false,
+          "unique": false,
+          "primaryKey": false
+        }
+      ],
+      "id": 4
+    }
+  ]
 }

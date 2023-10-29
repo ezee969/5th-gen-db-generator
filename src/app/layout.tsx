@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang='en'>
       <body className='flex min-h-screen flex-col py-2'>
         <Header />
-        <main className='grow bg-slate-900 py-3 pt-24'>{children}</main>
+        <main className='grow bg-slate-900 py-3 pt-4'>{children}</main>
         <Footer />
       </body>
     </html>
