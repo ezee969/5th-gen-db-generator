@@ -1,11 +1,20 @@
 {
   "models": [
     {
-      "modelName": "teteo",
+      "modelName": "user1",
       "fields": [
         {
-          "fieldName": "numerito",
-          "fieldType": "INT",
+          "fieldName": "firstName",
+          "fieldType": "STRING",
+          "size": "",
+          "defaultValue": "",
+          "notNull": true,
+          "unique": false,
+          "primaryKey": false
+        },
+        {
+          "fieldName": "lastName",
+          "fieldType": "STRING",
           "size": "",
           "defaultValue": "",
           "notNull": false,
@@ -13,8 +22,8 @@
           "primaryKey": false
         },
         {
-          "fieldName": "numerito2",
-          "fieldType": "INT",
+          "fieldName": "email",
+          "fieldType": "STRING",
           "size": "",
           "defaultValue": "",
           "notNull": false,
@@ -22,7 +31,7 @@
           "primaryKey": false
         }
       ],
-      "id": 1
+      "id": 4
     }
   ]
 }

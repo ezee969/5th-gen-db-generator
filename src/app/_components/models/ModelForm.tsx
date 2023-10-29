@@ -1,3 +1,4 @@
+// modularizar
 import React, { FC, ChangeEvent } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -27,7 +28,7 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
   const formik = useFormik({
     initialValues: {
       fieldName: '',
-      fieldType: 'INT',
+      fieldType: 'INTEGER',
       size: '',
       defaultValue: '',
       notNull: false,
@@ -56,7 +57,7 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
     formik.resetForm({
       values: {
         fieldName: '',
-        fieldType: 'INT',
+        fieldType: 'INTEGER',
         size: '',
         defaultValue: '',
         notNull: false,
@@ -122,10 +123,11 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
           className='mt-1 block w-full rounded-md border border-slate-700 bg-slate-800 p-2 text-white'
           {...formik.getFieldProps('fieldType')}
         >
-          <option value='INT'>INT</option>
-          <option value='VARCHAR'>VARCHAR</option>
-          <option value='BOOLEAN'>BOOLEAN</option>
+          <option value='INTEGER'>INTEGER</option>
+          <option value='FLOAT'>FLOAT</option>
           <option value='DATE'>DATE</option>
+          <option value='STRING'>STRING</option>
+          <option value='BOOLEAN'>BOOLEAN</option>
         </select>
       </div>
 

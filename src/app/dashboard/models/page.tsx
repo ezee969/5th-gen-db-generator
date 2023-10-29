@@ -1,5 +1,6 @@
 'use client';
 import FieldsList from '@/app/_components/models/FieldsList';
+import GenerateModelButton from '@/app/_components/models/GenerateModelButton';
 import ModelForm from '@/app/_components/models/ModelForm';
 import React, { useState, FC } from 'react';
 
@@ -9,6 +10,7 @@ interface Field {
   size: string;
   defaultValue: string;
   notNull: boolean;
+  unique: boolean;
   primaryKey: boolean;
 }
 
@@ -24,6 +26,7 @@ const ModelPage: FC = () => {
     <div className='mx-auto w-1/2 space-y-4'>
       <ModelForm model={model} setModel={setModel} />
       <FieldsList fields={model.fields} />
+      <GenerateModelButton />
     </div>
   );
 };
