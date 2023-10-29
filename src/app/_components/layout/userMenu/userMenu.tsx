@@ -1,12 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 // Components/ui
-import styles from './UserMenu.module.css';
+import styles from './userMenu.module.css';
 import Link from 'next/link';
 import avatarImg from '@/img/avatar.png';
 import Image from 'next/image';
-// Utils
-import { signOut } from 'next-auth/react';
 
 type User =
   | {

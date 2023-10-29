@@ -6,13 +6,12 @@ import { getServerSession } from 'next-auth';
 import { options } from '@/app/api/auth/[...nextauth]/options';
 // Ui
 import { unbounded } from '@/fonts';
-import UserMenu from '../../../components/UserMenu/UserMenu';
+import UserMenu from './userMenu/userMenu';
 import Link from 'next/link';
 
 const Header = async () => {
   const session = await getServerSession(options);
-  console.log(session?.user);
-
+  // console.log(session);
   return (
     <header className='w-full bg-slate-800 px-6 py-8'>
       <nav className='container mx-auto flex items-center justify-between'>
