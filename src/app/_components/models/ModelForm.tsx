@@ -4,21 +4,6 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { saveModel } from '@/services/modelService';
 
-interface Field {
-  fieldName: string;
-  fieldType: string;
-  size: string;
-  defaultValue: string;
-  notNull: boolean;
-  unique: boolean;
-  primaryKey: boolean;
-}
-
-interface Model {
-  modelName: string;
-  fields: Field[];
-}
-
 interface Props {
   model: Model;
   setModel: React.Dispatch<React.SetStateAction<Model>>;
