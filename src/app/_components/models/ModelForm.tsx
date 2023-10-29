@@ -34,8 +34,8 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
       primaryKey: false,
     } as Field,
     validationSchema: Yup.object({
-      fieldName: Yup.string().required('Required'),
-      fieldType: Yup.string().required('Required'),
+      fieldName: Yup.string(),
+      fieldType: Yup.string(),
       size: Yup.string(),
       defaultValue: Yup.string(),
     }),
@@ -43,6 +43,10 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
   });
 
   const addFieldToModel = () => {
+    if (formik.values.fieldName.trim() === '') {
+      return;
+    }
+
     setModel((prevModel) => ({
       ...prevModel,
       fields: [...prevModel.fields, formik.values],
@@ -93,9 +97,6 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
           className='mt-1 block w-full rounded-md border border-slate-700 bg-slate-800 p-2 text-white'
           {...formik.getFieldProps('fieldName')}
         />
-        {formik.touched.fieldName && formik.errors.fieldName ? (
-          <div className='text-xs text-red-500'>{formik.errors.fieldName}</div>
-        ) : null}
       </div>
 
       <div className='space-y-2'>
