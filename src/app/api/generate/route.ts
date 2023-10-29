@@ -1,11 +1,9 @@
-// remover anys
-
 import { NextApiRequest, NextApiResponse } from 'next';
 import fs from 'fs';
 import path from 'path';
 import { NextResponse } from 'next/server';
+import sequelize from '../../../../db';
 import { DataTypes } from 'sequelize';
-
 
 function generateModelFileContent(modelName: any, fields: any) {
   const fieldsCode = fields
@@ -21,7 +19,7 @@ function generateModelFileContent(modelName: any, fields: any) {
 
   return `
 const { DataTypes, Model } = require('sequelize');
-const sequelize = require('../db-connection');
+import sequelize from '../db';
 
 class ${modelName} extends Model {}
 
@@ -38,7 +36,6 @@ module.exports = ${modelName};
 }
 
 const defineModels = (dbData: any) => {
-  console.log(DataTypes);
   const modelsDir = path.join(process.cwd(), 'models');
   if (!fs.existsSync(modelsDir)) {
     fs.mkdirSync(modelsDir);
@@ -54,21 +51,36 @@ const defineModels = (dbData: any) => {
   });
 };
 
+function getModelAttributes(fields: any) {
+  const modelAttributes: any = {};
+  fields.forEach((field: any) => {
+    modelAttributes[field.fieldName] = {
+      type: DataTypes[field.fieldType],
+      allowNull: !field.notNull,
+      primaryKey: field.primaryKey,
+    };
+  });
+  return modelAttributes;
+}
+
+function defineSequelizeModels(dbData: any) {
+  dbData.models.forEach((model: any) => {
+    const modelAttributes = getModelAttributes(model.fields);
+    sequelize.define(model.modelName, modelAttributes);
+  });
+}
+
 export const POST = async (_req: NextApiRequest, _res: NextApiResponse) => {
   try {
     const dbData = JSON.parse(
       fs.readFileSync(path.join(process.cwd(), 'db.json'), 'utf8')
     );
-
     defineModels(dbData);
-
-    return NextResponse.json({
-      status: 200,
-    });
+    defineSequelizeModels(dbData);
+    await sequelize.sync({ force: true });
+    return NextResponse.json({ message: 'Migraciones exitosas' });
   } catch (error) {
-    console.error('Error:', error);
-    return NextResponse.json({
-      status: 500,
-    });
+    console.error('Error al generar migraciones:', error);
+    return NextResponse.json({ error: 'Error al generar migraciones' });
   }
 };

@@ -27,9 +27,9 @@ export default function ModelDetailPage({
   }, [params.id]);
 
   return (
-    <div className='bg-gray-900'>
+    <div>
       <div className='mx-auto max-w-7xl'>
-        <div className='mx-2 bg-gray-900 py-5'>
+        <div className='mx-2 bg-gray-800 py-5'>
           <div className='px-4 sm:px-6 lg:px-8'>
             <ModelDetailHeader modelName={modelData?.modelName || ''} />
             <LoadingErrorSection loading={loading} error={!modelData} />
