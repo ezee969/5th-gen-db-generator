@@ -8,6 +8,7 @@ interface Field {
   size: string;
   defaultValue: string;
   notNull: boolean;
+  unique: boolean;
   primaryKey: boolean;
 }
 
@@ -29,6 +30,7 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
       size: '',
       defaultValue: '',
       notNull: false,
+      unique: false,
       primaryKey: false,
     } as Field,
     validationSchema: Yup.object({
@@ -60,7 +62,7 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className='space-y-4 rounded-md bg-slate-700 p-4 text-white'
+      className='space-y-4 rounded-sm bg-slate-700 p-4 text-white'
     >
       <div className='space-y-2'>
         <label
@@ -157,7 +159,7 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
         </label>
       </div>
 
-      <div className='mb-4 flex items-center'>
+      <div className='mb-2 flex items-center'>
         <input
           id='primaryKey'
           type='checkbox'
@@ -172,17 +174,29 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
         </label>
       </div>
 
-      <div className='flex space-x-4'>
+      <div className='mb-2 flex items-center'>
+        <input
+          id='unique'
+          type='checkbox'
+          className='mr-2 rounded border border-slate-700 bg-slate-800'
+          {...formik.getFieldProps('unique')}
+        />
+        <label htmlFor='unique' className='text-sm font-medium text-gray-300'>
+          Unique
+        </label>
+      </div>
+
+      <div className='flex justify-between space-x-4'>
         <button
           type='button'
-          className='rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-500'
+          className='rounded bg-blue-600 px-4 py-2 uppercase text-white transition hover:bg-blue-500'
           onClick={addFieldToModel}
         >
           Add Field
         </button>
         <button
           type='submit'
-          className='rounded bg-green-600 px-4 py-2 text-white transition hover:bg-green-500'
+          className='rounded bg-green-600 px-4 py-2  font-bold uppercase transition hover:bg-green-500'
         >
           Save Model
         </button>
