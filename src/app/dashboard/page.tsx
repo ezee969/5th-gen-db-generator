@@ -9,6 +9,7 @@ import Body from './_components/body';
 import { Suspense } from 'react';
 import { PacmanLoader } from 'react-spinners';
 import LoadingEnano from '@/components/Loaders/LoadingEnano/LoadingEnano';
+import GenerateModelButton from '../_components/models/GenerateModelButton';
 const DashboardPage = async () => {
   const session = await getServerSession(options);
 
@@ -22,6 +23,7 @@ const DashboardPage = async () => {
       <Suspense fallback={<LoadingEnano />}>
         <Body userEmail={session.user?.email as string} />
       </Suspense>
+      <GenerateModelButton />
     </div>
   );
 };
