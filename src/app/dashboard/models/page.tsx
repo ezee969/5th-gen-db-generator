@@ -1,6 +1,5 @@
 'use client';
 import FieldsList from '@/app/_components/models/FieldsList';
-import GenerateModelButton from '@/app/_components/models/GenerateModelButton';
 import ModelForm from '@/app/_components/models/ModelForm';
 import React, { useState, FC } from 'react';
 

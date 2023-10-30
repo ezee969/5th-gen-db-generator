@@ -7,7 +7,9 @@ import { redirect } from 'next/navigation';
 import Header from './_components/header';
 import Body from './_components/body';
 import { Suspense } from 'react';
-const DasboardPage = async () => {
+import { PacmanLoader } from 'react-spinners';
+import LoadingEnano from '@/components/Loaders/LoadingEnano/LoadingEnano';
+const DashboardPage = async () => {
   const session = await getServerSession(options);
 
   if (!session) {
@@ -17,11 +19,11 @@ const DasboardPage = async () => {
   return (
     <div className='flex flex-col rounded-md bg-slate-950 px-4 py-6 text-white shadow '>
       <Header />
-      <Suspense fallback={<div className='thumb pulse'> Loading... </div>}>
+      <Suspense fallback={<LoadingEnano />}>
         <Body userEmail={session.user?.email as string} />
       </Suspense>
     </div>
   );
 };
 
-export default DasboardPage;
+export default DashboardPage;

@@ -1,7 +1,7 @@
 import React, { FC, ChangeEvent, useEffect, useState } from 'react';
 import { useFormik, FormikProvider } from 'formik';
 import * as Yup from 'yup';
-import { fetchAllModels, saveModel } from '@/services/modelService';
+import { saveModel, fetchModelsByUser } from '@/services/modelService';
 import FormField from './FormField';
 import FormButtons from './FormButtons';
 import { getSession } from 'next-auth/react';
@@ -15,10 +15,12 @@ interface Props {
 const ModelForm: FC<Props> = ({ model, setModel }) => {
   const router = useRouter();
   const [models, setModels] = useState<string[] | null>([]);
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     (async () => {
-      const data = await fetchAllModels();
+      const session = await getSession();
+      const data = await fetchModelsByUser(session?.user?.email as string);
       const modelNames = data.map((model) => model.modelName);
 
       setModels(modelNames);
@@ -26,6 +28,7 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
         formik.setFieldValue('targetModel', modelNames[0]);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const formik = useFormik({
@@ -48,6 +51,7 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
       targetModel: Yup.string(),
     }),
     onSubmit: async () => {
+      setIsSaving(true);
       try {
         const session = await getSession();
 
@@ -63,6 +67,7 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
       } catch (e) {
         console.log(e);
       }
+      setIsSaving(false);
     },
   });
 
@@ -142,20 +147,26 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
               label='Relationship Type'
               id='relationshipType'
               type='select'
-              options={['hasOne', 'belongsTo', 'hasMany', 'belongsToMany', 'none']}
+              options={[
+                'hasOne',
+                'belongsTo',
+                'hasMany',
+                'belongsToMany',
+                'none',
+              ]}
             />
             <FormField
               label='Target Model'
               id='targetModel'
               type='select'
-              options={['none',...models]}
+              options={['none', ...models]}
             />
           </>
         )}
 
         <FormField label='Not NULL' id='notNull' type='checkbox' />
         <FormField label='Unique' id='unique' type='checkbox' />
-        <FormButtons addFieldToModel={addFieldToModel} />
+        <FormButtons isLoading={isSaving} addFieldToModel={addFieldToModel} />
       </form>
     </FormikProvider>
   );

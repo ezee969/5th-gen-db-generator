@@ -1,41 +1,79 @@
 {
   "models": [
     {
-      "modelName": "etst",
+      "modelName": "Capo",
       "fields": [
         {
-          "fieldName": "test",
+          "fieldName": "asdasd",
           "fieldType": "INTEGER",
-          "size": "",
-          "defaultValue": "",
+          "size": 2,
+          "defaultValue": "1",
           "notNull": false,
           "unique": false
         }
       ],
-      "createdBy": "tobirastorza@gmail.com",
-      "id": 2,
+      "createdBy": "eze.olivero96@gmail.com",
+      "id": 1,
       "relationships": {
-        "type": "none",
-        "targetModel": "none"
+        "type": "hasOne",
+        "targetModel": ""
       }
     },
     {
-      "modelName": "relacionado",
+      "modelName": "dasd",
       "fields": [
         {
-          "fieldName": "test",
+          "fieldName": "4asd",
           "fieldType": "INTEGER",
-          "size": "",
-          "defaultValue": "",
+          "size": 2,
+          "defaultValue": "1",
           "notNull": false,
           "unique": false
         }
       ],
-      "createdBy": "tobirastorza@gmail.com",
+      "createdBy": "eze.olivero96@gmail.com",
+      "id": 2,
+      "relationships": {
+        "type": "hasOne",
+        "targetModel": "Capo"
+      }
+    },
+    {
+      "modelName": "asd",
+      "fields": [
+        {
+          "fieldName": "d",
+          "fieldType": "INTEGER",
+          "size": 2,
+          "defaultValue": "1",
+          "notNull": false,
+          "unique": false
+        }
+      ],
+      "createdBy": "eze.olivero96@gmail.com",
       "id": 3,
       "relationships": {
         "type": "hasOne",
-        "targetModel": "etst"
+        "targetModel": "dasd"
+      }
+    },
+    {
+      "modelName": "fg",
+      "fields": [
+        {
+          "fieldName": "3dasd",
+          "fieldType": "INTEGER",
+          "size": 3,
+          "defaultValue": "1",
+          "notNull": false,
+          "unique": false
+        }
+      ],
+      "createdBy": "eze.olivero96@gmail.com",
+      "id": 4,
+      "relationships": {
+        "type": "hasOne",
+        "targetModel": "none"
       }
     }
   ]
