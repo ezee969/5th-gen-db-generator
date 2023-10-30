@@ -15,6 +15,8 @@ export const saveModel = async (model: Model): Promise<Model | undefined> => {
   try {
     if (model.modelName.trim() === '') return;
 
+    if (model.fields.length === 0) return;
+
     const response = await axios.post(`${API_URL}/models`, model);
     return response.data;
   } catch (error) {

@@ -1,12 +1,11 @@
-import React, { FC, ChangeEvent, useEffect } from 'react';
+import React, { FC, ChangeEvent } from 'react';
 import { useFormik, FormikProvider } from 'formik';
 import * as Yup from 'yup';
 import { saveModel } from '@/services/modelService';
 import FormField from './FormField';
 import FormButtons from './FormButtons';
-import { options } from '@/app/api/auth/[...nextauth]/options';
-import { getServerSession } from 'next-auth';
 import { getSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   model: Model;
@@ -14,6 +13,8 @@ interface Props {
 }
 
 const ModelForm: FC<Props> = ({ model, setModel }) => {
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
       fieldName: '',
@@ -40,6 +41,7 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
         };
 
         saveModel(modelWithCreatedBy);
+        router.push('/dashboard');
       } catch (e) {
         console.log(e);
       }
