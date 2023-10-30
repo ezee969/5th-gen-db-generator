@@ -1,8 +1,12 @@
-// modularizar
-import React, { FC, ChangeEvent } from 'react';
-import { useFormik } from 'formik';
+import React, { FC, ChangeEvent, useEffect } from 'react';
+import { useFormik, FormikProvider } from 'formik';
 import * as Yup from 'yup';
 import { saveModel } from '@/services/modelService';
+import FormField from './FormField';
+import FormButtons from './FormButtons';
+import { options } from '@/app/api/auth/[...nextauth]/options';
+import { getServerSession } from 'next-auth';
+import { getSession } from 'next-auth/react';
 
 interface Props {
   model: Model;
@@ -26,7 +30,20 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
       size: Yup.string(),
       defaultValue: Yup.string(),
     }),
-    onSubmit: () => saveModel(model),
+    onSubmit: async () => {
+      try {
+        const session = await getSession();
+
+        const modelWithCreatedBy = {
+          ...model,
+          createdBy: session?.user?.email as string,
+        };
+
+        saveModel(modelWithCreatedBy);
+      } catch (e) {
+        console.log(e);
+      }
+    },
   });
 
   const addFieldToModel = () => {
@@ -61,146 +78,41 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
   };
 
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className='space-y-4 rounded-sm bg-slate-700 p-4 text-white'
-    >
-      <div className='space-y-2'>
-        <label
-          htmlFor='modelName'
-          className='block text-sm font-medium text-gray-300'
-        >
-          Model name
-        </label>
-        <input
-          id='modelName'
-          type='text'
-          value={model.modelName}
-          onChange={handleModelNameChange}
-          className='mt-1 block w-full rounded-md border border-slate-700 bg-slate-800 p-2 text-white'
-        />
-      </div>
-
-      <div className='space-y-2'>
-        <label
-          htmlFor='fieldName'
-          className='block text-sm font-medium text-gray-300'
-        >
-          Field name
-        </label>
-        <input
-          id='fieldName'
-          type='text'
-          className='mt-1 block w-full rounded-md border border-slate-700 bg-slate-800 p-2 text-white'
-          {...formik.getFieldProps('fieldName')}
-        />
-      </div>
-
-      <div className='space-y-2'>
-        <label
-          htmlFor='fieldType'
-          className='block text-sm font-medium text-gray-300'
-        >
-          Field type
-        </label>
-        <select
+    <FormikProvider value={formik}>
+      <form
+        onSubmit={formik.handleSubmit}
+        className='space-y-4 rounded-sm bg-slate-700 p-4 text-white'
+      >
+        <div className='space-y-2'>
+          <label
+            htmlFor='modelName'
+            className='block text-sm font-medium text-gray-300'
+          >
+            Model name
+          </label>
+          <input
+            id='modelName'
+            type='text'
+            value={model.modelName}
+            onChange={handleModelNameChange}
+            className='mt-1 block w-full rounded-md border border-slate-700 bg-slate-800 p-2 text-white'
+          />
+        </div>
+        <FormField label='Field name' id='fieldName' type='text' />
+        <FormField
+          label='Field type'
           id='fieldType'
-          className='mt-1 block w-full rounded-md border border-slate-700 bg-slate-800 p-2 text-white'
-          {...formik.getFieldProps('fieldType')}
-        >
-          <option value='INTEGER'>INTEGER</option>
-          <option value='FLOAT'>FLOAT</option>
-          <option value='DATE'>DATE</option>
-          <option value='STRING'>STRING</option>
-          <option value='BOOLEAN'>BOOLEAN</option>
-        </select>
-      </div>
-
-      <div className='space-y-2'>
-        <label
-          htmlFor='size'
-          className='block text-sm font-medium text-gray-300'
-        >
-          Size
-        </label>
-        <input
-          id='size'
-          type='text'
-          className='mt-1 block w-full rounded-md border border-slate-700 bg-slate-800 p-2 text-white'
-          {...formik.getFieldProps('size')}
+          type='select'
+          options={['INTEGER', 'FLOAT', 'DATE', 'STRING', 'BOOLEAN']}
         />
-      </div>
-
-      <div className='space-y-2'>
-        <label
-          htmlFor='defaultValue'
-          className='block text-sm font-medium text-gray-300'
-        >
-          Default value
-        </label>
-        <input
-          id='defaultValue'
-          type='text'
-          className='mt-1 block w-full rounded-md border border-slate-700 bg-slate-800 p-2 text-white'
-          {...formik.getFieldProps('defaultValue')}
-        />
-      </div>
-
-      <div className='mb-2 flex items-center'>
-        <input
-          id='notNull'
-          type='checkbox'
-          className='mr-2 rounded border border-slate-700 bg-slate-800'
-          {...formik.getFieldProps('notNull')}
-        />
-        <label htmlFor='notNull' className='text-sm font-medium text-gray-300'>
-          Not NULL
-        </label>
-      </div>
-
-      <div className='mb-2 flex items-center'>
-        <input
-          id='primaryKey'
-          type='checkbox'
-          className='mr-2 rounded border border-slate-700 bg-slate-800'
-          {...formik.getFieldProps('primaryKey')}
-        />
-        <label
-          htmlFor='primaryKey'
-          className='text-sm font-medium text-gray-300'
-        >
-          Primary Key
-        </label>
-      </div>
-
-      <div className='mb-2 flex items-center'>
-        <input
-          id='unique'
-          type='checkbox'
-          className='mr-2 rounded border border-slate-700 bg-slate-800'
-          {...formik.getFieldProps('unique')}
-        />
-        <label htmlFor='unique' className='text-sm font-medium text-gray-300'>
-          Unique
-        </label>
-      </div>
-
-      <div className='flex justify-between space-x-4'>
-        <button
-          type='button'
-          className='rounded bg-blue-600 px-4 py-2 uppercase text-white transition hover:bg-blue-500'
-          onClick={addFieldToModel}
-        >
-          Add Field
-        </button>
-        <button
-          type='submit'
-          className='rounded bg-green-600 px-4 py-2  font-bold uppercase transition hover:bg-green-500'
-        >
-          Save Model
-        </button>
-      </div>
-    </form>
+        <FormField label='Size' id='size' type='number' />
+        <FormField label='Default value' id='defaultValue' type='text' />
+        <FormField label='Not NULL' id='notNull' type='checkbox' />
+        <FormField label='Primary Key' id='primaryKey' type='checkbox' />
+        <FormField label='Unique' id='unique' type='checkbox' />
+        <FormButtons addFieldToModel={addFieldToModel} />
+      </form>
+    </FormikProvider>
   );
 };
 
