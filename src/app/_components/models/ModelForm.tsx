@@ -56,7 +56,9 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
           createdBy: session?.user?.email as string,
         };
 
-        saveModel(modelWithCreatedBy);
+        const response = await saveModel(modelWithCreatedBy);
+
+        if (!response) return;
         router.push('/dashboard');
       } catch (e) {
         console.log(e);
@@ -140,13 +142,13 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
               label='Relationship Type'
               id='relationshipType'
               type='select'
-              options={['hasOne', 'belongsTo', 'hasMany', 'belongsToMany']}
+              options={['hasOne', 'belongsTo', 'hasMany', 'belongsToMany', 'none']}
             />
             <FormField
               label='Target Model'
               id='targetModel'
               type='select'
-              options={models}
+              options={['none',...models]}
             />
           </>
         )}

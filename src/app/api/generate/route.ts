@@ -17,18 +17,18 @@ function generateFieldsCode(fields) {
     .join(',\n    ');
 }
 
-function generateRelationshipsCode(relationship) {
-  if (!relationship || relationship.targetModel === '') return '';
+function generateRelationshipsCode(modelName, relationship) {
+  if (!relationship || relationship.targetModel === 'none' || relationship.type === 'none') return '';
   const { type, targetModel } = relationship;
   switch (type) {
     case 'hasOne':
-      return `${targetModel}.hasOne(models.${targetModel});\n`;
+      return `${modelName}.hasOne(models.${targetModel});\n`;
     case 'belongsTo':
-      return `${targetModel}.belongsTo(models.${targetModel});\n`;
+      return `${modelName}.belongsTo(models.${targetModel});\n`;
     case 'hasMany':
-      return `${targetModel}.hasMany(models.${targetModel});\n`;
+      return `${modelName}.hasMany(models.${targetModel});\n`;
     case 'belongsToMany':
-      return `${targetModel}.belongsToMany(models.${targetModel}, { through: 'ModelName_TargetModel' });\n`;
+      return `${modelName}.belongsToMany(models.${targetModel}, { through: 'ModelName_TargetModel' });\n`;
     default:
       return '';
   }
@@ -36,7 +36,7 @@ function generateRelationshipsCode(relationship) {
 
 function generateModelFileContent(modelName, fields, relationship) {
   const fieldsCode = generateFieldsCode(fields);
-  const relationshipsCode = generateRelationshipsCode(relationship);
+  const relationshipsCode = generateRelationshipsCode(modelName, relationship);
 
   const associateSection = relationshipsCode !== ''
     ? `
@@ -98,7 +98,7 @@ function defineSequelizeModels(dbData) {
   const models = dbData.models.map((model) => {
     const modelAttributes = getModelAttributes(model.fields);
     const sequelizeModel = sequelize.define(model.modelName, modelAttributes);
-    if (model.relationships.targetModel !== '') {
+    if (model.relationships.targetModel !== 'none' && model.relationships.type !== 'none') {
       const { type, targetModel } = model.relationships;
       switch (type) {
         case 'hasOne':
