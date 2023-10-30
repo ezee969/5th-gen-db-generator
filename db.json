@@ -1,20 +1,3 @@
 {
-  "models": [
-    {
-      "modelName": "test",
-      "fields": [
-        {
-          "fieldName": "int",
-          "fieldType": "INTEGER",
-          "size": "",
-          "defaultValue": "",
-          "notNull": false,
-          "unique": false,
-          "primaryKey": false
-        }
-      ],
-      "createdBy": "tobirastorza@gmail.com",
-      "id": 1
-    }
-  ]
+  "models": []
 }

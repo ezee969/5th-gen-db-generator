@@ -11,6 +11,7 @@ export const fetchModels = async (user: string): Promise<Model[]> => {
 
   return res.data;
 };
+
 export const saveModel = async (model: Model): Promise<Model | undefined> => {
   try {
     if (model.modelName.trim() === '') return;
@@ -23,4 +24,10 @@ export const saveModel = async (model: Model): Promise<Model | undefined> => {
     console.error('Error saving model:', error);
     throw error;
   }
+};
+
+export const fetchAllModels = async (): Promise<Model[]> => {
+  const res = await axios.get<Model[]>('http://localhost:3004/models');
+
+  return res.data;
 };
