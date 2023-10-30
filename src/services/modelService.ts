@@ -4,7 +4,8 @@ const API_URL = 'http://localhost:3004';
 
 export const fetchModels = async (user: string): Promise<Model[]> => {
   if (!user) return [];
-
+  // make the request to last longer so i can test the loader
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   const res = await axios.get<Model[]>(
     'http://localhost:3004/models?createdBy=' + user
   );
