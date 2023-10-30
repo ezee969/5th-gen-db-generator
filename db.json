@@ -1,7 +1,8 @@
 {
   "models": [
     {
-      "modelName": "user",
+      "createdBy": "eze.olivero96@gmail.com",
+      "modelName": "user1",
       "fields": [
         {
           "fieldName": "firstName",

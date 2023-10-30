@@ -11,4 +11,6 @@ interface Field {
 interface Model {
   modelName: string;
   fields: Field[];
+  id: string;
+  createdBy: string;
 }
