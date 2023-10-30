@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BeatLoader, ClockLoader } from 'react-spinners';
+import { BeatLoader } from 'react-spinners';
 
 interface FormButtonsProps {
   addFieldToModel: () => void;
