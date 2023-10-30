@@ -1,7 +1,7 @@
-import React, { FC, ChangeEvent } from 'react';
+import React, { FC, ChangeEvent, useEffect, useState } from 'react';
 import { useFormik, FormikProvider } from 'formik';
 import * as Yup from 'yup';
-import { saveModel } from '@/services/modelService';
+import { fetchAllModels, saveModel } from '@/services/modelService';
 import FormField from './FormField';
 import FormButtons from './FormButtons';
 import { getSession } from 'next-auth/react';
@@ -14,6 +14,19 @@ interface Props {
 
 const ModelForm: FC<Props> = ({ model, setModel }) => {
   const router = useRouter();
+  const [models, setModels] = useState<string[] | null>([]);
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetchAllModels();
+      const modelNames = data.map((model) => model.modelName);
+
+      setModels(modelNames);
+      if (modelNames.length > 0) {
+        formik.setFieldValue('targetModel', modelNames[0]);
+      }
+    })();
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -24,12 +37,16 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
       notNull: false,
       unique: false,
       primaryKey: false,
-    } as Field,
+      relationshipType: 'hasOne',
+      targetModel: '',
+    } as Field & Relationship,
     validationSchema: Yup.object({
       fieldName: Yup.string(),
       fieldType: Yup.string(),
       size: Yup.string(),
       defaultValue: Yup.string(),
+      relationshipType: Yup.string(),
+      targetModel: Yup.string(),
     }),
     onSubmit: async () => {
       try {
@@ -53,9 +70,17 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
       return;
     }
 
+    const { relationshipType, targetModel, ...fieldValues } = formik.values;
+
+    const relationship = {
+      type: relationshipType,
+      targetModel: targetModel,
+    };
+
     setModel((prevModel) => ({
       ...prevModel,
-      fields: [...prevModel.fields, formik.values],
+      fields: [...prevModel.fields, fieldValues],
+      relationships: relationship,
     }));
 
     formik.resetForm({
@@ -67,6 +92,8 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
         notNull: false,
         unique: false,
         primaryKey: false,
+        relationshipType: relationshipType,
+        targetModel: targetModel,
       },
     });
   };
@@ -109,6 +136,23 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
         />
         <FormField label='Size' id='size' type='number' />
         <FormField label='Default value' id='defaultValue' type='text' />
+        {models && models.length > 0 && (
+          <>
+            <FormField
+              label='Relationship Type'
+              id='relationshipType'
+              type='select'
+              options={['hasOne', 'belongsTo', 'hasMany', 'belongsToMany']}
+            />
+            <FormField
+              label='Target Model'
+              id='targetModel'
+              type='select'
+              options={models}
+            />
+          </>
+        )}
+
         <FormField label='Not NULL' id='notNull' type='checkbox' />
         <FormField label='Primary Key' id='primaryKey' type='checkbox' />
         <FormField label='Unique' id='unique' type='checkbox' />

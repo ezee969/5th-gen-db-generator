@@ -10,13 +10,13 @@ const ModelPage: FC = () => {
     fields: [],
     createdBy: '',
     id: '',
+    relationship: undefined,
   });
 
   return (
     <div className='mx-auto w-1/2 space-y-4'>
       <ModelForm model={model} setModel={setModel} />
       <FieldsList fields={model.fields} />
-      <GenerateModelButton />
     </div>
   );
 };

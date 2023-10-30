@@ -7,6 +7,7 @@ import { fetchModels } from '@/services/modelService';
 // Components/ui
 import ModelItem from './_components/modelItem';
 import Link from 'next/link';
+import GenerateModelButton from '../_components/models/GenerateModelButton';
 
 const DasboardPage = async () => {
   const session = await getServerSession(options);
@@ -32,6 +33,7 @@ const DasboardPage = async () => {
           <ModelItem model={model} key={model} />
         ))}
       </ul>
+      <GenerateModelButton />
     </div>
   );
 };

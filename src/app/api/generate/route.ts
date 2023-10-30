@@ -5,9 +5,9 @@ import { NextResponse } from 'next/server';
 import sequelize from '../../../../db';
 import { DataTypes } from 'sequelize';
 
-function generateModelFileContent(modelName: any, fields: any) {
-  const fieldsCode = fields
-    .map((field: any) => {
+function generateFieldsCode(fields) {
+  return fields
+    .map((field) => {
       return `${field.fieldName}: {
             type: DataTypes.${field.fieldType},
             allowNull: ${!field.notNull},
@@ -16,6 +16,28 @@ function generateModelFileContent(modelName: any, fields: any) {
         }`;
     })
     .join(',\n    ');
+}
+
+function generateRelationshipsCode(relationship) {
+  if (!relationship) return '';
+  const { type, targetModel } = relationship;
+  switch (type) {
+    case 'hasOne':
+      return `${targetModel}.hasOne(models.${targetModel});\n`;
+    case 'belongsTo':
+      return `${targetModel}.belongsTo(models.${targetModel});\n`;
+    case 'hasMany':
+      return `${targetModel}.hasMany(models.${targetModel});\n`;
+    case 'belongsToMany':
+      return `${targetModel}.belongsToMany(models.${targetModel}, { through: 'ModelName_TargetModel' });\n`;
+    default:
+      return '';
+  }
+}
+
+function generateModelFileContent(modelName, fields, relationship) {
+  const fieldsCode = generateFieldsCode(fields);
+  const relationshipsCode = generateRelationshipsCode(relationship);
 
   return `
 const { DataTypes, Model } = require('sequelize');
@@ -31,29 +53,34 @@ ${modelName}.init({
     timestamps: false
 });
 
+${modelName}.associate = function(models) {
+    ${relationshipsCode}
+};
+
 module.exports = ${modelName};
 `;
 }
 
-const defineModels = (dbData: any) => {
+const defineModels = (dbData) => {
   const modelsDir = path.join(process.cwd(), 'models');
   if (!fs.existsSync(modelsDir)) {
     fs.mkdirSync(modelsDir);
   }
 
-  dbData.models.forEach((model: any) => {
+  dbData.models.forEach((model) => {
     const modelContent = generateModelFileContent(
       model.modelName,
-      model.fields
+      model.fields,
+      model.relationships
     );
     const modelFilePath = path.join(modelsDir, `${model.modelName}.js`);
     fs.writeFileSync(modelFilePath, modelContent);
   });
 };
 
-function getModelAttributes(fields: any) {
-  const modelAttributes: any = {};
-  fields.forEach((field: any) => {
+function getModelAttributes(fields) {
+  const modelAttributes = {};
+  fields.forEach((field) => {
     modelAttributes[field.fieldName] = {
       type: DataTypes[field.fieldType],
       allowNull: !field.notNull,
@@ -63,14 +90,40 @@ function getModelAttributes(fields: any) {
   return modelAttributes;
 }
 
-function defineSequelizeModels(dbData: any) {
-  dbData.models.forEach((model: any) => {
+function defineSequelizeModels(dbData) {
+  const models = dbData.models.map((model) => {
     const modelAttributes = getModelAttributes(model.fields);
-    sequelize.define(model.modelName, modelAttributes);
+    const sequelizeModel = sequelize.define(model.modelName, modelAttributes);
+    if (model.relationships) {
+      const { type, targetModel } = model.relationships;
+      switch (type) {
+        case 'hasOne':
+          sequelizeModel.hasOne(sequelize.models[targetModel]);
+          break;
+        case 'belongsTo':
+          sequelizeModel.belongsTo(sequelize.models[targetModel]);
+          break;
+        case 'hasMany':
+          sequelizeModel.hasMany(sequelize.models[targetModel]);
+          break;
+        case 'belongsToMany':
+          sequelizeModel.belongsToMany(sequelize.models[targetModel], {
+            through: `${model.modelName}_${targetModel}`,
+          });
+          break;
+      }
+    }
+    return sequelizeModel;
+  });
+
+  models.forEach((model) => {
+    if (model.associate) {
+      model.associate(sequelize.models);
+    }
   });
 }
 
-export const POST = async (_req: NextApiRequest, _res: NextApiResponse) => {
+export const POST = async (_req, _res) => {
   try {
     const dbData = JSON.parse(
       fs.readFileSync(path.join(process.cwd(), 'db.json'), 'utf8')
