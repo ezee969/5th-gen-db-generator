@@ -10,7 +10,6 @@ interface Field {
   defaultValue: string;
   notNull: boolean;
   unique: boolean;
-  primaryKey: boolean;
 }
 
 interface Model {
