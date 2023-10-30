@@ -4,12 +4,12 @@ import sequelizeIcon from '@/img/sequelizejs-icon.svg';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const ModelItem = ({ model }: { model: any }) => {
+const ModelItem = ({ model }: { model: Model }) => {
   return (
-    <li>
+    <li className='rounded bg-gray-800 p-2 text-slate-100 transition-all hover:bg-gray-700'>
       <Link
-        className='flex items-center gap-4 text-white transition-all hover:scale-105 hover:transform'
-        href={`/dashboard/${model.id}`}
+        className='flex items-center gap-4  '
+        href={`/dashboard/models/${model.id}`}
       >
         <Image
           src={sequelizeIcon}

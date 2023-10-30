@@ -4,23 +4,13 @@ import GenerateModelButton from '@/app/_components/models/GenerateModelButton';
 import ModelForm from '@/app/_components/models/ModelForm';
 import React, { useState, FC } from 'react';
 
-interface Field {
-  fieldName: string;
-  fieldType: string;
-  size: string;
-  defaultValue: string;
-  notNull: boolean;
-  unique: boolean;
-  primaryKey: boolean;
-}
-
-interface Model {
-  modelName: string;
-  fields: Field[];
-}
-
 const ModelPage: FC = () => {
-  const [model, setModel] = useState<Model>({ modelName: '', fields: [] });
+  const [model, setModel] = useState<Model>({
+    modelName: '',
+    fields: [],
+    createdBy: '',
+    id: '',
+  });
 
   return (
     <div className='mx-auto w-1/2 space-y-4'>
