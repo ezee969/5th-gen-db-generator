@@ -1,3 +1,55 @@
 {
-  "models": []
+  "models": [
+    {
+      "modelName": "modelo",
+      "fields": [
+        {
+          "fieldName": "int",
+          "fieldType": "INTEGER",
+          "size": "",
+          "defaultValue": "",
+          "notNull": true,
+          "unique": true
+        },
+        {
+          "fieldName": "float",
+          "fieldType": "FLOAT",
+          "size": "",
+          "defaultValue": "",
+          "notNull": false,
+          "unique": false
+        },
+        {
+          "fieldName": "date",
+          "fieldType": "DATE",
+          "size": "",
+          "defaultValue": "",
+          "notNull": false,
+          "unique": false
+        },
+        {
+          "fieldName": "string",
+          "fieldType": "STRING",
+          "size": "",
+          "defaultValue": "",
+          "notNull": false,
+          "unique": false
+        },
+        {
+          "fieldName": "bool",
+          "fieldType": "BOOLEAN",
+          "size": "",
+          "defaultValue": "",
+          "notNull": false,
+          "unique": false
+        }
+      ],
+      "createdBy": "tobirastorza@gmail.com",
+      "id": 1,
+      "relationships": {
+        "type": "hasOne",
+        "targetModel": ""
+      }
+    }
+  ]
 }

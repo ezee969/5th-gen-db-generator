@@ -11,15 +11,14 @@ function generateFieldsCode(fields) {
       return `${field.fieldName}: {
             type: DataTypes.${field.fieldType},
             allowNull: ${!field.notNull},
-            unique: ${field.unique},
-            primaryKey: ${field.primaryKey}
+            unique: ${field.unique}
         }`;
     })
     .join(',\n    ');
 }
 
 function generateRelationshipsCode(relationship) {
-  if (!relationship) return '';
+  if (!relationship || relationship.targetModel === '') return '';
   const { type, targetModel } = relationship;
   switch (type) {
     case 'hasOne':
@@ -39,6 +38,14 @@ function generateModelFileContent(modelName, fields, relationship) {
   const fieldsCode = generateFieldsCode(fields);
   const relationshipsCode = generateRelationshipsCode(relationship);
 
+  const associateSection = relationshipsCode !== ''
+    ? `
+${modelName}.associate = function(models) {
+    ${relationshipsCode}
+};
+`
+    : '';
+
   return `
 const { DataTypes, Model } = require('sequelize');
 import sequelize from '../db';
@@ -53,9 +60,7 @@ ${modelName}.init({
     timestamps: false
 });
 
-${modelName}.associate = function(models) {
-    ${relationshipsCode}
-};
+${associateSection}
 
 module.exports = ${modelName};
 `;
@@ -84,7 +89,6 @@ function getModelAttributes(fields) {
     modelAttributes[field.fieldName] = {
       type: DataTypes[field.fieldType],
       allowNull: !field.notNull,
-      primaryKey: field.primaryKey,
     };
   });
   return modelAttributes;
@@ -94,7 +98,7 @@ function defineSequelizeModels(dbData) {
   const models = dbData.models.map((model) => {
     const modelAttributes = getModelAttributes(model.fields);
     const sequelizeModel = sequelize.define(model.modelName, modelAttributes);
-    if (model.relationships) {
+    if (model.relationships.targetModel !== '') {
       const { type, targetModel } = model.relationships;
       switch (type) {
         case 'hasOne':

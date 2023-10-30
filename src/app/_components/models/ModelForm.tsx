@@ -36,7 +36,6 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
       defaultValue: '',
       notNull: false,
       unique: false,
-      primaryKey: false,
       relationshipType: 'hasOne',
       targetModel: '',
     } as Field & Relationship,
@@ -91,7 +90,6 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
         defaultValue: '',
         notNull: false,
         unique: false,
-        primaryKey: false,
         relationshipType: relationshipType,
         targetModel: targetModel,
       },
@@ -154,7 +152,6 @@ const ModelForm: FC<Props> = ({ model, setModel }) => {
         )}
 
         <FormField label='Not NULL' id='notNull' type='checkbox' />
-        <FormField label='Primary Key' id='primaryKey' type='checkbox' />
         <FormField label='Unique' id='unique' type='checkbox' />
         <FormButtons addFieldToModel={addFieldToModel} />
       </form>
