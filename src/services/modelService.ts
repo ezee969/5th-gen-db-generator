@@ -6,8 +6,6 @@ export const CACHE_TAG_MODELS = 'models';
 export const fetchModelsByUser = async (user: string): Promise<Model[]> => {
   const url = `${API_URL}/models?createdBy=${user}`;
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-
   if (!user) return [];
 
   const res = await fetch(url);
