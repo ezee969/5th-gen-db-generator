@@ -8,7 +8,7 @@ import { fetchModelsByUser } from '@/services/modelService';
 import LoadingEnano from '@/components/Loaders/LoadingEnano/LoadingEnano';
 
 const Body = ({ userEmail }: { userEmail: string }) => {
-  const [models, setModels] = useState([]);
+  const [models, setModels] = useState<Model[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,11 +21,15 @@ const Body = ({ userEmail }: { userEmail: string }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const renderModelItem = (model: Model) => {
+    return <ModelItem model={model} key={model.id} />;
+  };
+
   return (
     <ul className='flex h-[560px] flex-col justify-center gap-4 overflow-auto text-xl font-semibold'>
       {!loading &&
         models.length > 0 &&
-        models.map((model: any) => <ModelItem model={model} key={model} />)}
+        models.map((model) => renderModelItem(model))}
       {!loading && models.length === 0 && (
         <li className='text-center text-xl font-semibold text-slate-300'>
           You have no models yet
