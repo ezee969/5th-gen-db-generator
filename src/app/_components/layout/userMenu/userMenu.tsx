@@ -3,7 +3,7 @@ import React from 'react';
 // Components/ui
 import styles from './userMenu.module.css';
 import Link from 'next/link';
-import avatarImg from '@/img/avatar.png';
+import avatarImg from '@/assets/avatar.png';
 import Image from 'next/image';
 
 type User =

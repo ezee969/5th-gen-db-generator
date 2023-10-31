@@ -1,6 +1,6 @@
 import React from 'react';
 // Components/ui
-import sequelizeIcon from '@/img/sequelizejs-icon.svg';
+import sequelizeIcon from '@/assets/sequelizejs-icon.svg';
 import Link from 'next/link';
 import Image from 'next/image';
 

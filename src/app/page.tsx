@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import sequelizeLogoSvg from '@/img/sequelizejs-logo.svg';
+import sequelizeLogoSvg from '@/assets/sequelizejs-logo.svg';
 import Hero from './_components/page/hero';
 import Features from './_components/page/features';
 import Testimonials from './_components/page/testimonials';

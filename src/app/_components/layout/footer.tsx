@@ -1,9 +1,9 @@
 import React from 'react';
 // Components/Ui
 import { unbounded } from '@/fonts';
-import facebookIcon from '@/img/facebook-icon.png';
-import instagramIcon from '@/img/instagram-icon.png';
-import youtubeIcon from '@/img/youtube-icon.png';
+import facebookIcon from '@/assets/facebook-icon.png';
+import instagramIcon from '@/assets/instagram-icon.png';
+import youtubeIcon from '@/assets/youtube-icon.png';
 import StyledFooterIcon from './styledFooterIcon';
 
 const Footer = () => {
