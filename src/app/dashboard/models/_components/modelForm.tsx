@@ -2,8 +2,8 @@ import React, { FC, ChangeEvent, useEffect, useState } from 'react';
 import { useFormik, FormikProvider } from 'formik';
 import * as Yup from 'yup';
 import { saveModel, fetchModelsByUser } from '@/services/modelService';
-import FormField from './FormField';
-import FormButtons from './FormButtons';
+import FormField from './formField';
+import FormButtons from './formButtons';
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 

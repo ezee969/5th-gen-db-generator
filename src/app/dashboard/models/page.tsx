@@ -1,6 +1,7 @@
 'use client';
-import FieldsList from '@/app/_components/models/FieldsList';
-import ModelForm from '@/app/_components/models/ModelForm';
+
+import FieldsList from './_components/fieldsList';
+import ModelForm from './_components/modelForm';
 import React, { useState, FC } from 'react';
 
 const ModelPage: FC = () => {
