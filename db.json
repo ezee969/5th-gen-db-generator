@@ -75,6 +75,101 @@
         "type": "hasOne",
         "targetModel": "none"
       }
+    },
+    {
+      "modelName": "asd",
+      "fields": [
+        {
+          "fieldName": "asd",
+          "fieldType": "INTEGER",
+          "size": 2,
+          "defaultValue": "1",
+          "notNull": false,
+          "unique": false
+        }
+      ],
+      "createdBy": "eze.olivero96@gmail.com",
+      "id": 5,
+      "relationships": {
+        "type": "none",
+        "targetModel": "Capo"
+      }
+    },
+    {
+      "modelName": "nuevo",
+      "fields": [
+        {
+          "fieldName": "nuevooo",
+          "fieldType": "INTEGER",
+          "size": 2,
+          "defaultValue": "1",
+          "notNull": false,
+          "unique": false
+        }
+      ],
+      "createdBy": "eze.olivero96@gmail.com",
+      "id": 6,
+      "relationships": {
+        "type": "none",
+        "targetModel": "Capo"
+      }
+    },
+    {
+      "modelName": "nuevo2",
+      "fields": [
+        {
+          "fieldName": "asd",
+          "fieldType": "INTEGER",
+          "size": 2,
+          "defaultValue": "1",
+          "notNull": false,
+          "unique": false
+        }
+      ],
+      "createdBy": "eze.olivero96@gmail.com",
+      "id": 7,
+      "relationships": {
+        "type": "hasOne",
+        "targetModel": "Capo"
+      }
+    },
+    {
+      "modelName": "nuevo3",
+      "fields": [
+        {
+          "fieldName": "ds",
+          "fieldType": "INTEGER",
+          "size": 2,
+          "defaultValue": "1",
+          "notNull": false,
+          "unique": false
+        }
+      ],
+      "createdBy": "eze.olivero96@gmail.com",
+      "id": 8,
+      "relationships": {
+        "type": "hasOne",
+        "targetModel": "Capo"
+      }
+    },
+    {
+      "modelName": "nuevo4",
+      "fields": [
+        {
+          "fieldName": "aasd",
+          "fieldType": "INTEGER",
+          "size": 2,
+          "defaultValue": "1",
+          "notNull": false,
+          "unique": false
+        }
+      ],
+      "createdBy": "eze.olivero96@gmail.com",
+      "id": 9,
+      "relationships": {
+        "type": "hasOne",
+        "targetModel": "Capo"
+      }
     }
   ]
 }
