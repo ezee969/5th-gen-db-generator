@@ -20,9 +20,7 @@ const DashboardPage = async () => {
   return (
     <div className='flex flex-col rounded-md bg-slate-950 px-4 py-6 text-white shadow '>
       <Header />
-      {/* <Suspense fallback={<LoadingEnano />}> */}
       <Body userEmail={session.user?.email as string} />
-      {/* </Suspense> */}
       <GenerateModelButton />
     </div>
   );
