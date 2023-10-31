@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import sequelizeSvg from '@/img/sequelizejs-icon.svg';
+import sequelizeSvg from '@/assets/sequelizejs-icon.svg';
 
 const features = [1, 2, 3, 4];
 const Features = () => {
