@@ -2,40 +2,52 @@ interface Props {
   fields: Field[];
 }
 
+const TableCell = ({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <td
+    className={`whitespace-nowrap border border-gray-700 px-3 py-4 text-sm text-gray-300 ${className}`}
+  >
+    {children}
+  </td>
+);
+
+const TableHeader = ({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <th
+    className={`border border-gray-700 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white ${className}`}
+  >
+    {children}
+  </th>
+);
+
 export default function ModelDetailTable({ fields }: Props) {
   return (
-    <table className='min-w-full divide-y divide-gray-600'>
+    <table className='min-w-full divide-y divide-gray-600 overflow-hidden rounded-lg bg-gray-900 shadow-lg'>
       <thead>
         <tr>
-          <th className='py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-0'>
-            Field Name
-          </th>
-          <th className='px-3 py-3.5 text-left text-sm font-semibold text-white'>
-            Field Type
-          </th>
-          <th className='px-3 py-3.5 text-left text-sm font-semibold text-white'>
-            Not Null
-          </th>
-          <th className='px-3 py-3.5 text-left text-sm font-semibold text-white'>
-            Unique
-          </th>
+          <TableHeader>Field Name</TableHeader>
+          <TableHeader>Field Type</TableHeader>
+          <TableHeader>Not Null</TableHeader>
+          <TableHeader>Unique</TableHeader>
         </tr>
       </thead>
       <tbody className='divide-y divide-gray-600'>
         {fields.map((field: Field, index: number) => (
           <tr key={index}>
-            <td className='whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-0'>
-              {field.fieldName}
-            </td>
-            <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-300'>
-              {field.fieldType}
-            </td>
-            <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-300'>
-              {field.notNull ? 'Yes' : 'No'}
-            </td>
-            <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-300'>
-              {field.unique ? 'Yes' : 'No'}
-            </td>
+            <TableCell className='font-medium'>{field.fieldName}</TableCell>
+            <TableCell>{field.fieldType}</TableCell>
+            <TableCell>{field.notNull ? 'Yes' : 'No'}</TableCell>
+            <TableCell>{field.unique ? 'Yes' : 'No'}</TableCell>
           </tr>
         ))}
       </tbody>
