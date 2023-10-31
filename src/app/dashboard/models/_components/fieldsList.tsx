@@ -11,7 +11,7 @@ interface Props {
 
 const FieldsList: FC<Props> = ({ fields }) => {
   return (
-    <div className='rounded-md bg-slate-900 p-4 text-white w-1/2'>
+    <div className='w-1/2 rounded-md bg-slate-900 p-4 text-white'>
       <h2 className='mb-4 text-lg font-semibold text-gray-300'>
         Fields Added:
       </h2>

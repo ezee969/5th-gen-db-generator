@@ -1,6 +1,7 @@
 'use client';
-import { BeatLoader } from 'react-spinners';
 import React from 'react';
+// Components/ui
+import { BeatLoader } from 'react-spinners';
 
 const GenerateModelButton = () => {
   const [isLoading, setIsLoading] = React.useState(false);

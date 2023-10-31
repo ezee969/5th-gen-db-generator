@@ -1,14 +1,14 @@
 import React from 'react';
 // Utils
+import { Suspense } from 'react';
 import { getServerSession } from 'next-auth';
 import { options } from '../api/auth/[...nextauth]/options';
 import { redirect } from 'next/navigation';
 // Components/ui
 import Header from './_components/header';
 import Body from './_components/body';
-import { Suspense } from 'react';
+import GenerateModelButton from './_components/generateModelButton';
 import LoadingEnano from '@/components/Loaders/LoadingEnano/LoadingEnano';
-import GenerateModelButton from '../_components/models/GenerateModelButton';
 
 const DashboardPage = async () => {
   const session = await getServerSession(options);
