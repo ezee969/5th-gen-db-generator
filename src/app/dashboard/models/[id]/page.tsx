@@ -1,7 +1,7 @@
 'use client';
-import LoadingErrorSection from '@/app/_components/models/detail/LoadingErrorSection';
-import ModelDetailHeader from '@/app/_components/models/detail/ModelDetailHeader';
-import ModelDetailTable from '@/app/_components/models/detail/ModelDetailTable';
+import LoadingErrorSection from './_components/loadingErrorSection';
+import ModelDetailHeader from './_components/modelDetailHeader';
+import ModelDetailTable from './_components/modelDetailTable';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 

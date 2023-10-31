@@ -2,7 +2,7 @@ import React from 'react';
 // Components/ui
 import './styles.css';
 import Image from 'next/image';
-import HasbullaImage from '../../assets/hasbullah_200.png';
+import HasbullaImage from '@/assets/hasbullah_200.png';
 
 export default function LoadingHasbulla() {
   return (
