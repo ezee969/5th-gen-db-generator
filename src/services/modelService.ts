@@ -28,6 +28,12 @@ export const saveModel = async (model: Model): Promise<Model | undefined> => {
   }
 };
 
+export const generateModel = async () => {
+  await fetch('/api/generate', {
+    method: 'POST',
+  });
+};
+
 export const fetchAllModels = async (): Promise<Model[]> => {
   const res = await axios.get<Model[]>('http://localhost:3004/models');
 
