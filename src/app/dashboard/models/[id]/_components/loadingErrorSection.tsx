@@ -1,4 +1,4 @@
-import LoadingHasbulla from "@/components/Loaders/LoadingHasbulla";
+import LoadingHasbulla from '@/components/Loaders/LoadingHasbulla/LoadingHasbulla';
 
 interface Props {
   loading: boolean;
@@ -7,7 +7,7 @@ interface Props {
 
 export default function LoadingErrorSection({ loading, error }: Props) {
   if (loading) {
-    return <LoadingHasbulla/>;
+    return <LoadingHasbulla />;
   }
 
   if (error) {
