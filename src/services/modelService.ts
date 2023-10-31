@@ -29,9 +29,14 @@ export const saveModel = async (model: Model): Promise<Model | undefined> => {
 };
 
 export const generateModel = async () => {
-  await fetch('/api/generate', {
-    method: 'POST',
-  });
+  try {
+    const response = await axios.post('/api/generate');
+    if (response.status !== 200) {
+      throw new Error('Request failed');
+    }
+  } catch (error) {
+    console.error('Error occurred during fetch operation:', error);
+  }
 };
 
 export const fetchAllModels = async (): Promise<Model[]> => {
