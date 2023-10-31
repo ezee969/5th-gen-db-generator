@@ -7,9 +7,9 @@ import { redirect } from 'next/navigation';
 import Header from './_components/header';
 import Body from './_components/body';
 import { Suspense } from 'react';
-import { PacmanLoader } from 'react-spinners';
 import LoadingEnano from '@/components/Loaders/LoadingEnano/LoadingEnano';
 import GenerateModelButton from '../_components/models/GenerateModelButton';
+
 const DashboardPage = async () => {
   const session = await getServerSession(options);
 
@@ -20,9 +20,9 @@ const DashboardPage = async () => {
   return (
     <div className='flex flex-col rounded-md bg-slate-950 px-4 py-6 text-white shadow '>
       <Header />
-      <Suspense fallback={<LoadingEnano />}>
-        <Body userEmail={session.user?.email as string} />
-      </Suspense>
+      {/* <Suspense fallback={<LoadingEnano />}> */}
+      <Body userEmail={session.user?.email as string} />
+      {/* </Suspense> */}
       <GenerateModelButton />
     </div>
   );

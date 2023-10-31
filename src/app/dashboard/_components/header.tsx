@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Header = () => {
   return (
-    <div className='mb-6 flex justify-between'>
+    <div className=' flex justify-between'>
       <h2 className='p-auto  text-xl font-medium'>Your models:</h2>
       <Link
         href={'/dashboard/models'}

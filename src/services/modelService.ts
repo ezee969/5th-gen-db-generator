@@ -1,16 +1,19 @@
 import axios from 'axios';
 
 const API_URL = 'http://localhost:3004';
+export const CACHE_TAG_MODELS = 'models';
 
 export const fetchModelsByUser = async (user: string): Promise<Model[]> => {
-  if (!user) return [];
-  // make the request to last longer so i can test the loader
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-  const res = await axios.get<Model[]>(
-    'http://localhost:3004/models?createdBy=' + user
-  );
+  const url = `${API_URL}/models?createdBy=${user}`;
 
-  return res.data;
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  if (!user) return [];
+
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('Error fetching models');
+
+  return await res.json();
 };
 
 export const saveModel = async (model: Model): Promise<Model | undefined> => {
