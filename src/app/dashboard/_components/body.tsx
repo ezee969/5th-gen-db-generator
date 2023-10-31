@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 // Components/ui
 import ModelItem from './modelItem';
+import { unbounded } from '@/fonts';
 // Utils
 import { fetchModelsByUser } from '@/services/modelService';
 import LoadingEnano from '@/components/Loaders/LoadingEnano/LoadingEnano';
@@ -26,7 +27,9 @@ const Body = ({ userEmail }: { userEmail: string }) => {
   };
 
   return (
-    <ul className='flex h-[560px] flex-col justify-center gap-4 overflow-auto text-xl font-semibold'>
+    <ul
+      className={`flex h-[560px] flex-col justify-center gap-4 overflow-auto text-xl font-medium${unbounded.className}`}
+    >
       {!loading &&
         models.length > 0 &&
         models.map((model) => renderModelItem(model))}

@@ -17,7 +17,7 @@ const DashboardPage = async () => {
   }
 
   return (
-    <div className='flex flex-col rounded-md bg-slate-950 px-4 py-6 text-white shadow '>
+    <div className='flex flex-col rounded bg-slate-950 px-4 py-6 text-white shadow '>
       <Header />
       <Body userEmail={session.user?.email as string} />
       <GenerateModelButton />
