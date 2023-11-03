@@ -17,7 +17,7 @@ const Contact = () => {
             placeholder='jack@example.com'
             name='email'
             className='mt-2 w-1/4 rounded-md border border-gray-600 bg-black py-3 pl-2 pr-2 font-semibold text-gray-800 hover:border-gray-700'
-          />{' '}
+          />
           <Link
             className='ml-2 mt-2 inline-flex transform items-center rounded-lg border bg-transparent bg-white px-14 py-3 font-medium text-black transition duration-500 ease-in-out'
             href='/'
